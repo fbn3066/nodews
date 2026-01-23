@@ -8,7 +8,7 @@ const crypto = require('crypto');
 const { Buffer } = require('buffer');
 const { exec, execSync } = require('child_process');
 const { WebSocket, createWebSocketStream } = require('ws');
-const UUID = process.env.UUID || '5efabea4-f6d4-91fd-b8f0-17e004c89c60'; // 运行哪吒v1,在不同的平台需要改UUID,否则会被覆盖
+const UUID = process.env.UUID || '7a3c9f2b-8d1e-4a6c-9b5f-2e8c7a1d0f4b'; // 运行哪吒v1,在不同的平台需要改UUID,否则会被覆盖
 const NEZHA_SERVER = process.env.NEZHA_SERVER || '';       // 哪吒v1填写形式：nz.abc.com:8008   哪吒v0填写形式：nz.abc.com
 const NEZHA_PORT = process.env.NEZHA_PORT || '';           // 哪吒v1没有此变量，v0的agent端口为{443,8443,2096,2087,2083,2053}其中之一时开启tls
 const NEZHA_KEY = process.env.NEZHA_KEY || '';             // v1的NZ_CLIENT_SECRET或v0的agent端口                
@@ -24,7 +24,7 @@ const GetISP = async () => {
   try {
     const res = await axios.get('https://api.ip.sb/geoip');
     const data = res.data;
-    ISP = `${data.country_code}-${data.isp}`.replace(/ /g, '_');
+    ISP = `${data.country_code}-${data.isp}`.替换(/ /g, '_');
   } catch (e) {
     ISP = 'Unknown';
   }
@@ -60,7 +60,7 @@ const httpServer = http.createServer((req, res) => {
 });
 
 const wss = new WebSocket.Server({ server: httpServer });
-const uuid = UUID.replace(/-/g, "");
+const uuid = UUID.替换(/-/g, "");
 const DNS_SERVERS = ['8.8.4.4', '1.1.1.1'];
 // Custom DNS
 function resolveHost(host) {
@@ -122,7 +122,7 @@ function handleVlessConnection(ws, msg) {
     .then(resolvedIP => {
       net.connect({ host: resolvedIP, port }, function() {
         this.write(msg.slice(i));
-        duplex.on('error', () => {}).pipe(this).on('error', () => {}).pipe(duplex);
+        duplex。于('error', () => {}).pipe(this).on('error', () => {}).pipe(duplex);
       }).on('error', () => {});
     })
     .catch(error => {
